@@ -23,6 +23,15 @@ async function index(req, res, next) {
     where: queryFilter,
     include: {
       categories: true,
+      user: {
+        select: {
+          id: true,
+          name: true,
+          surname: true,
+          email: true,
+          role: true,
+        },
+      },
     },
   });
 
@@ -65,6 +74,7 @@ async function store(req, res, next) {
       categories: {
         connect: addData.categories.map((categoryId) => ({ id: +categoryId })),
       },
+      userId: +addData.userId,
     },
     include: {
       categories: true,

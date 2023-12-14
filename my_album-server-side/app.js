@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 // ROUTERS
 const picturesRouter = require("./routers/picturesRouter");
 const categoriesRouter = require("./routers/categoriesRouter");
+const usersRouter = require("./routers/usersRouter");
 
 // MIDDLEWARES
 const routeNotFound = require("./middlewares/routeNotFound");
@@ -27,6 +28,7 @@ app.use(express.json());
 // ROUTES
 app.use("/pictures", picturesRouter);
 app.use("/categories", categoriesRouter);
+app.use("/", usersRouter);
 
 app.use(routeNotFound);
 app.use(errorsHandler);
