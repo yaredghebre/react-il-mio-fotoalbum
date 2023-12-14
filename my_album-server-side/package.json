@@ -1,0 +1,29 @@
+{
+  "name": "react-il-mio-fotoalbum",
+  "version": "1.0.0",
+  "description": "The purpose of this app is to let users upload their favourite pictures",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yaredghebre/react-il-mio-fotoalbum.git"
+  },
+  "author": "yaredghebre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yaredghebre/react-il-mio-fotoalbum/issues"
+  },
+  "homepage": "https://github.com/yaredghebre/react-il-mio-fotoalbum#readme",
+  "dependencies": {
+    "@prisma/client": "^5.7.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "prisma": "^5.7.0"
+  }
+}
