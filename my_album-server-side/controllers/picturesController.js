@@ -61,8 +61,13 @@ async function show(req, res, next) {
 
 async function store(req, res, next) {
   const addData = req.body;
+  const image = req.file;
   if (!addData.title) {
     return next(new Validation("Title is missing!"));
+  }
+
+  if (image) {
+    addData.image = image.filename;
   }
 
   const newPicture = await prisma.picture.create({
@@ -87,6 +92,11 @@ async function store(req, res, next) {
 async function update(req, res, next) {
   const pictureId = req.params.id;
   const editData = req.body;
+  const image = req.file;
+
+  if (image) {
+    editData.image = image.filename;
+  }
 
   try {
     const exisistingPicture = await prisma.picture.findUnique({

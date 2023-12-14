@@ -89,10 +89,6 @@ async function update(req, res, next) {
   }
 }
 
-// async function destroy(req, res, next) {
-//     const userId =
-// }
-
 /////////////// R E G I S T E R ///////////////////
 async function register(req, res, next) {
   const sanitizedData = matchedData(req);
