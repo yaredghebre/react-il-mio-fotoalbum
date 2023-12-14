@@ -1,5 +1,6 @@
 const prisma = require("../library/PrismaClient");
 const NotFound = require("../exceptions/NotFound");
+const Validation = require("../exceptions/ValidationError");
 
 async function index(req, res, next) {
   // Filters
@@ -33,27 +34,118 @@ async function index(req, res, next) {
 
 async function show(req, res, next) {
   const pictureId = req.params.id;
-  const data = await prisma.picture.findUnique({
+  const showData = await prisma.picture.findUnique({
     where: {
-      id: pictureId,
+      id: +pictureId,
     },
     include: {
       categories: true,
     },
   });
 
-  if (!data) {
+  if (!showData) {
     next(new NotFound("Post Not Found"));
   }
 
-  return res.json(data);
+  return res.json(showData);
 }
 
-async function store(req, res, next) {}
+async function store(req, res, next) {
+  const addData = req.body;
+  if (!addData.title) {
+    return next(new Validation("Title is missing!"));
+  }
 
-async function update(req, res) {}
+  const newPicture = await prisma.picture.create({
+    data: {
+      title: addData.title,
+      image: addData.image,
+      description: addData.description,
+      visible: addData.visible,
+      categories: {
+        connect: addData.categories.map((categoryId) => ({ id: +categoryId })),
+      },
+    },
+    include: {
+      categories: true,
+    },
+  });
 
-async function destroy(req, res) {}
+  return res.json(newPicture);
+}
+
+async function update(req, res, next) {
+  const pictureId = req.params.id;
+  const editData = req.body;
+
+  try {
+    const exisistingPicture = await prisma.picture.findUnique({
+      where: {
+        id: +pictureId,
+      },
+      include: {
+        categories: true,
+      },
+    });
+
+    if (!exisistingPicture) {
+      next(new NotFound("Post Not Found"));
+    }
+
+    const editedPicture = await prisma.picture.update({
+      where: {
+        id: +pictureId,
+      },
+      data: {
+        title: editData.title,
+        image: editData.image,
+        description: editData.description,
+        visible: editData.visible,
+        categories: {
+          connect: editData.categories.map((categoryId) => ({
+            id: +categoryId,
+          })),
+        },
+      },
+    });
+    return res.json(editedPicture);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "Something went while updating the Picture!" });
+  }
+}
+
+async function destroy(req, res, next) {
+  const pictureId = req.params.id;
+  const deleteData = req.body;
+
+  try {
+    const exisistingPicture = await prisma.picture.findUnique({
+      where: {
+        id: +pictureId,
+      },
+      include: {
+        categories: true,
+      },
+    });
+
+    if (!exisistingPicture) {
+      next(new NotFound("Post Not Found"));
+    }
+
+    const deletedPicture = await prisma.picture.delete({
+      where: {
+        id: +pictureId,
+      },
+    });
+    return res.json({ message: "Post deleted", deletedPicture });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "Something when wrong while deleting the Picture" });
+  }
+}
 
 module.exports = {
   index,
