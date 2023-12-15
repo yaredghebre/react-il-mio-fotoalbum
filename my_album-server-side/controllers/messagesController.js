@@ -35,4 +35,12 @@ async function store(req, res, next) {
       content: addData.content,
     },
   });
+
+  return res.json(newMessage);
 }
+
+module.exports = {
+  index,
+  show,
+  store,
+};
