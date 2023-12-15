@@ -1,9 +1,9 @@
-const prisma = require("../library/PrismaClient");
+const prisma = require("../../library/PrismaClient");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const { matchedData } = require("express-validator");
-const usersAuthError = require("../exceptions/usersAuthError");
-const NotFound = require("../exceptions/NotFound");
+const usersAuthError = require("../../exceptions/usersAuthError");
+const NotFound = require("../../exceptions/NotFound");
 
 async function index(req, res) {
   const users = await prisma.user.findMany({

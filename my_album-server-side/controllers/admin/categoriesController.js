@@ -1,5 +1,5 @@
-const prisma = require("../library/PrismaClient");
-const Validation = require("../exceptions/ValidationError");
+const prisma = require("../../library/PrismaClient");
+const Validation = require("../../exceptions/ValidationError");
 
 const { validationResult } = require("express-validator");
 

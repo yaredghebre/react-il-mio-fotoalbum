@@ -6,6 +6,9 @@ const picturesRouter = require("./routers/picturesRouter");
 const categoriesRouter = require("./routers/categoriesRouter");
 const usersRouter = require("./routers/usersRouter");
 
+// ADMIN ROUTERS
+const picturesRouterAdmin = require("./routers/admin/picturesRouter");
+
 // MIDDLEWARES
 const routeNotFound = require("./middlewares/routeNotFound");
 const errorsHandler = require("./middlewares/errorsHandler");
@@ -27,6 +30,7 @@ app.use(express.json());
 
 // ROUTES
 app.use("/pictures", picturesRouter);
+app.use("/admin/pictures", picturesRouterAdmin);
 app.use("/categories", categoriesRouter);
 app.use("/", usersRouter);
 
