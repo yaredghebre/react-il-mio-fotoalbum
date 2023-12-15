@@ -1,12 +1,11 @@
 const prisma = require("../library/PrismaClient");
 const NotFound = require("../exceptions/NotFound");
 
+// INDEX GUEST
 async function index(req, res, next) {
-  // Filters
   const filters = req.query.filter;
   const queryFilter = { visible: true };
 
-  // Pagination
   const page = req.query.page || 1;
   const perPage = 25;
 
@@ -32,6 +31,7 @@ async function index(req, res, next) {
   return res.json({ data, page, perPage, total });
 }
 
+// SHOW GUEST
 async function show(req, res, next) {
   const pictureId = req.params.id;
   const showData = await prisma.picture.findUnique({

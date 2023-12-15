@@ -76,11 +76,6 @@ async function update(req, res, next) {
         name: editUser.name,
         surname: editUser.surname,
         email: editUser.email,
-        // pictures: {
-        //   connect: editUser.pictures.map((pictureId) => ({
-        //     id: +pictureId,
-        //   })),
-        // },
       },
     });
     return res.json(editedUser);
