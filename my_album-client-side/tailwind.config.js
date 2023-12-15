@@ -9,10 +9,6 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [
-    require('flowbite/plugin'),
-    require('tw-elements/dist/plugin.cjs'),
-    require('daisyui'),
-  ],
+  plugins: [require('flowbite/plugin'), require('tw-elements/dist/plugin.cjs')],
   darkMode: 'class',
 };

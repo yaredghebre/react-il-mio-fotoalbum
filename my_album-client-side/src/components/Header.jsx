@@ -1,19 +1,35 @@
 import React from 'react';
-// import { a, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthProvider';
+
+const NavBarLink = ({ href, onClick, children }) => {
+  return (
+    <Link
+      to={href}
+      onClick={onClick}
+      className="font-bold transition-all duration-300 hover:bg-gray-100 hover:text-red-500"
+    >
+      {children}
+    </Link>
+  );
+};
 
 const Header = () => {
+  const { handleLogOut, isLogged } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <div>
       <nav className="border-gray-200 bg-white dark:bg-gray-900">
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-          <a
-            // to="/"
+          <Link
+            to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white ">
               My Photo Album.
             </span>
-          </a>
+          </Link>
           <button
             data-collapse-toggle="navbar-dropdown"
             type="button"
@@ -43,15 +59,18 @@ const Header = () => {
             id="navbar-dropdown"
           >
             <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium rtl:space-x-reverse dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
-              <li>
-                <a
-                  // to="/"
-                  className="block rounded bg-blue-700 px-3 py-2 text-gray-900 dark:text-white md:bg-transparent md:p-0 md:hover:text-blue-700 md:dark:text-blue-500"
-                  aria-current="page"
+              {isLogged ? (
+                <li>
+                  <NavBarLink onClick={handleLogOut}>Log Out</NavBarLink>
+                </li>
+              ) : (
+                <Link
+                  to="/login"
+                  className="font-bold transition-all duration-300 hover:bg-gray-100 hover:text-red-500"
                 >
-                  Home
-                </a>
-              </li>
+                  Log In
+                </Link>
+              )}
               <li>
                 <button
                   id="dropdownHoverButton"
