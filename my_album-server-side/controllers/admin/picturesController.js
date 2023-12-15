@@ -67,7 +67,7 @@ async function store(req, res, next) {
       title: addData.title,
       image: addData.image,
       description: addData.description,
-      visible: addData.visible,
+      visible: addData.visible == "true",
       categories: {
         connect: addData.categories.map((categoryId) => ({ id: +categoryId })),
       },

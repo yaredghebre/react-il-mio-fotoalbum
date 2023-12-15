@@ -19,6 +19,9 @@ const cors = require("cors");
 // EXPRESS
 const app = express();
 
+// PUBLIC FILE
+app.use(express.static("public"));
+
 // PORT
 let port = +process.env.PORT || 3001;
 
