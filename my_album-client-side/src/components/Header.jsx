@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthProvider';
+import AuthButton from './AuthButton';
 
 const NavBarLink = ({ href, onClick, children }) => {
   return (
@@ -27,7 +28,15 @@ const Header = () => {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white ">
-              My Photo Album.
+              <button class="group relative z-10 h-12 w-32 cursor-pointer overflow-hidden rounded-md border-none bg-black p-2 text-xl font-bold text-white">
+                My Album
+                <span class="absolute -left-2 -top-8 h-32 w-36 origin-left rotate-12 scale-x-0 transform bg-white transition-transform duration-1000 group-hover:scale-x-100 group-hover:duration-500"></span>
+                <span class="absolute -left-2 -top-8 h-32 w-36 origin-left rotate-12 scale-x-0 transform bg-indigo-400 transition-transform duration-700 group-hover:scale-x-100 group-hover:duration-700"></span>
+                <span class="absolute -left-2 -top-8 h-32 w-36 origin-left rotate-12 scale-x-0 transform bg-indigo-600 transition-transform duration-500 group-hover:scale-x-50 group-hover:duration-1000"></span>
+                <span class="absolute left-6 top-2.5 z-10 opacity-0 duration-100 group-hover:opacity-100 group-hover:duration-1000">
+                  My Album
+                </span>
+              </button>
             </span>
           </Link>
           <button
@@ -60,71 +69,20 @@ const Header = () => {
           >
             <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium rtl:space-x-reverse dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
               {isLogged ? (
-                <li>
-                  <NavBarLink onClick={handleLogOut}>Log Out</NavBarLink>
+                <li className="flex gap-3">
+                  <NavBarLink onClick={handleLogOut}>
+                    <AuthButton color="red" content="Log Out" />
+                  </NavBarLink>
+
+                  <NavBarLink onClick={navigate('/dashboard')}>
+                    <AuthButton color="pink" content="Dashboard" />
+                  </NavBarLink>
                 </li>
               ) : (
-                <Link
-                  to="/login"
-                  className="font-bold transition-all duration-300 hover:bg-gray-100 hover:text-red-500"
-                >
-                  Log In
+                <Link to="/login">
+                  <AuthButton color="green" content="Log In" />
                 </Link>
               )}
-              <li>
-                <button
-                  id="dropdownHoverButton"
-                  data-dropdown-toggle="dropdownHover"
-                  data-dropdown-trigger="hover"
-                  className="flex w-full transform items-center justify-between rounded px-3 py-2 text-gray-900 transition duration-150 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:focus:text-white md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-700"
-                  type="button"
-                >
-                  Posts
-                  <svg
-                    className="ms-2.5 h-2.5 w-2.5"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m1 1 4 4 4-4"
-                    />
-                  </svg>
-                </button>
-
-                {/* Dropdown Menu */}
-                <div
-                  id="dropdownHover"
-                  className="z-10 hidden w-44 divide-y divide-gray-100 rounded-lg bg-white font-normal shadow dark:divide-gray-600 dark:bg-gray-700"
-                >
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-400"
-                    aria-labelledby="dropdownHoverButton"
-                  >
-                    <li>
-                      <a
-                        // to="/posts"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        All Posts
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        // to="/add-new-post"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Add New Post
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
             </ul>
           </div>
         </div>

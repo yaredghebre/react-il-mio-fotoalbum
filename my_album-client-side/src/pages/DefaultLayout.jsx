@@ -7,7 +7,7 @@ const DefaultLayout = () => {
   return (
     <div>
       <Header></Header>
-      <main className="min-h-[77vh] bg-slate-400 py-12">
+      <main className="min-h-screen">
         <Outlet></Outlet>
       </main>
       <Footer></Footer>
