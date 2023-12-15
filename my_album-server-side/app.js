@@ -3,8 +3,8 @@ const dotenv = require("dotenv");
 
 // ROUTERS
 const picturesRouter = require("./routers/picturesRouter");
-const categoriesRouter = require("./routers/categoriesRouter");
-const usersRouter = require("./routers/usersRouter");
+const categoriesRouter = require("./routers/admin/categoriesRouter");
+const usersRouter = require("./routers/admin/usersRouter");
 
 // ADMIN ROUTERS
 const picturesRouterAdmin = require("./routers/admin/picturesRouter");
