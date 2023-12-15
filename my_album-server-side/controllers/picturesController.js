@@ -46,6 +46,7 @@ async function show(req, res, next) {
 
   if (!showData) {
     next(new NotFound("Post Not Found"));
+    return;
   }
 
   return res.json(showData);

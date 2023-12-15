@@ -45,6 +45,7 @@ model User {
 
 model Message {
   id        Int      @id @default(autoincrement())
+  email     String
   title     String   @db.VarChar(30)
   content   String?  @db.Text
   createdAt DateTime @default(now())
