@@ -4,6 +4,7 @@ import homeCover1 from '../assets/placeHolders/homeCover1.jpg';
 import homeCover6 from '../assets/placeHolders/homeCover6.jpg';
 import homeCover7 from '../assets/placeHolders/homeCover7.jpg';
 import '../css/styles.modules.css';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const ref = useRef();
@@ -24,6 +25,10 @@ const Home = () => {
           <h2 className="text-5xl font-bold text-white">
             Welcome to My Photo Album
           </h2>
+          <Link to={'/pictures'}>
+            {' '}
+            <p className="text-white">Pictures</p>
+          </Link>
         </ParallaxLayer>
         <ParallaxLayer
           offset={1}

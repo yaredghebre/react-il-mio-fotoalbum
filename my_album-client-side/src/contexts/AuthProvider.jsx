@@ -53,7 +53,7 @@ const AuthProvider = ({ children }) => {
       await fetchLoggedUser();
     }
 
-    console.log('render AuthContext useEffect');
+    // console.log('render AuthContext useEffect');
 
     setInitComplete(true);
   };

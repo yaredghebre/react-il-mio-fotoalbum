@@ -10,6 +10,10 @@ import DefaultLayout from './pages/DefaultLayout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Pictures from './pages/Pictures';
+
+// AdminPages
+import AdminPictures from './pages/AdminPictures';
 
 // Middlewares
 import GuestRoutes from './middlewares/GuestRoutes';
@@ -18,10 +22,6 @@ import PrivateRoutes from './middlewares/PrivateRoutes';
 // Contexts
 import AuthProvider from './contexts/AuthProvider';
 
-// Components
-// import Header from './components/Header';
-// import Footer from './components/Footer';
-
 function App() {
   return (
     <>
@@ -29,8 +29,8 @@ function App() {
         <AuthProvider>
           <Routes>
             {/* PUBLIC ROUTE */}
-            <Route element={<DefaultLayout />}>
-              <Route path="/" element={<Home />}></Route>
+            <Route path="/" element={<DefaultLayout />}>
+              <Route index element={<Home />} />
               <Route
                 path="/login"
                 element={
@@ -38,20 +38,20 @@ function App() {
                     <Login />
                   </GuestRoutes>
                 }
-              ></Route>
+              />
+              <Route path="/pictures" element={<Pictures />} />
             </Route>
 
             {/* PRIVATE ROUTE */}
             <Route
-              path="/dashboard"
               element={
                 <PrivateRoutes>
                   <DefaultLayout />
                 </PrivateRoutes>
               }
             >
-              <Route index element={<Dashboard />}></Route>
-              <Route path="/dashboard/user" element={<Dashboard />}></Route>
+              <Route path="/dashboard/*" element={<Dashboard></Dashboard>} />
+              <Route path="admin/adminpictures" element={<AdminPictures />} />
             </Route>
           </Routes>
         </AuthProvider>

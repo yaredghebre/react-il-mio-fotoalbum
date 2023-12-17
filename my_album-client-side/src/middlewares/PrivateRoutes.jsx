@@ -8,11 +8,11 @@ const PrivateRoutes = ({ children }) => {
   console.log(initComplete);
   useEffect(() => {
     if (!isLogged && initComplete) {
-      navigate('/');
+      navigate('/login');
     }
-  }, [initComplete, isLogged]);
+  }, [initComplete, isLogged, navigate]);
 
-  return <div>{initComplete && children}</div>;
+  return <div>{isLogged && initComplete && children}</div>;
 };
 
 export default PrivateRoutes;

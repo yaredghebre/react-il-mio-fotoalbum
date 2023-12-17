@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthProvider';
 import AuthButton from './AuthButton';
@@ -18,6 +18,12 @@ const NavBarLink = ({ href, onClick, children }) => {
 const Header = () => {
   const { handleLogOut, isLogged } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLogged) {
+      navigate('/dashboard');
+    }
+  }, [isLogged, navigate]);
 
   return (
     <div>
@@ -74,7 +80,7 @@ const Header = () => {
                     <AuthButton color="red" content="Log Out" />
                   </NavBarLink>
 
-                  <NavBarLink onClick={navigate('/dashboard')}>
+                  <NavBarLink onClick={() => navigate('/dashboard')}>
                     <AuthButton color="pink" content="Dashboard" />
                   </NavBarLink>
                 </li>
