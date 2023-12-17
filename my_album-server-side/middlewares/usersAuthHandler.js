@@ -10,9 +10,13 @@ module.exports = (req, res, next) => {
 
   const token = bearer.split(" ")[1];
 
-  const user = jsonwebtoken.verify(token, process.env.JWT_SECRET);
+  try {
+    const user = jsonwebtoken.verify(token, process.env.JWT_SECRET);
 
-  req["user"] = user;
+    req["user"] = user;
+  } catch (error) {
+    return next(new usersAuthError(error.message));
+  }
 
   next();
 };

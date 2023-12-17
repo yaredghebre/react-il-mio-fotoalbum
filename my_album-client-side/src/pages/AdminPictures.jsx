@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import fetchApi from '../utilities/fetchApi';
 
 const AdminPictures = () => {
   const [pictures, setPictures] = useState([]);
 
+  const getPictures = async () => {
+    try {
+      const resp = await fetchApi('/admin/pictures');
+      setPictures(resp.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
-    fetchApi
-      .get('/admin/pictures')
-      .then((response) => {
-        console.log(response);
-        setPictures(response.data.data);
-      })
-      .catch((error) => {
-        console.error('Something went wrong while fetching pictures:', error);
-      });
+    getPictures();
   }, []);
 
   return (

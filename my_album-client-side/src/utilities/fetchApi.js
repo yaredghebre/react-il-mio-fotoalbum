@@ -1,12 +1,16 @@
-async function fetchApi(path, method = 'GET', body = null) {
+const fetchApi = async (path, method = 'GET', body = null) => {
   try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      throw new Error('Token missing');
+    }
+
     const resp = await fetch(import.meta.env.VITE_API_URL + path, {
       method,
       headers: {
         'Content-Type': body instanceof FormData ? null : 'application/json',
-        Authorization: localStorage.getItem('token')
-          ? `Bearer ${localStorage.getItem('token')}`
-          : null,
+        Authorization: `Bearer ${token}`,
       },
       body: body ? JSON.stringify(body) : null,
     });
@@ -14,24 +18,20 @@ async function fetchApi(path, method = 'GET', body = null) {
     const data = await resp.json();
 
     if (!resp.ok) {
-      if (data.error === 'TokenExpiredError' || data.error === 'AuthError') {
-        localStorage.removeItem('token');
-        window.location = '/login';
-      }
-
       throw new Error(
         data.message ??
-          "A causa di un errore non è possibile eseguire l'operazione richiesta.",
+          "A causa di un errore non è possibile eseguire l'accesso",
       );
     }
 
     return data;
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   }
-}
+};
 
 export default fetchApi;
+
 // import axios from 'axios';
 
 // const instance = axios.create({

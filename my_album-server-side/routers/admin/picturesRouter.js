@@ -19,8 +19,9 @@ const storage = multer.diskStorage({
 
 router.get(
   "/",
-  query("").optional().isBoolean().withMessage("Visible must be a Boolean!"),
-  query("content").optional().trim().escape(),
+  // query("").optional().isBoolean().withMessage("Visible must be a Boolean!"),
+  // query("content").optional().trim().escape(),
+  authHandler,
   picturesController.index
 );
 

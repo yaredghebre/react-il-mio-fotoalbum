@@ -29,17 +29,15 @@ function App() {
         <AuthProvider>
           <Routes>
             {/* PUBLIC ROUTE */}
-            <Route path="/" element={<DefaultLayout />}>
-              <Route index element={<Home />} />
-              <Route
-                path="/login"
-                element={
-                  <GuestRoutes>
-                    <Login />
-                  </GuestRoutes>
-                }
-              />
-              <Route path="/pictures" element={<Pictures />} />
+            <Route
+              element={
+                <GuestRoutes>
+                  <DefaultLayout />
+                </GuestRoutes>
+              }
+            >
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/login" element={<Login />}></Route>
             </Route>
 
             {/* PRIVATE ROUTE */}
@@ -50,8 +48,8 @@ function App() {
                 </PrivateRoutes>
               }
             >
-              <Route path="/dashboard/*" element={<Dashboard></Dashboard>} />
-              <Route path="admin/adminpictures" element={<AdminPictures />} />
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/pictures" element={<AdminPictures />}></Route>
             </Route>
           </Routes>
         </AuthProvider>
