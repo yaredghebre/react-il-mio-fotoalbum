@@ -1,5 +1,6 @@
 const fetchApi = async (path, method = 'GET', body = null) => {
   try {
+    // debugger;
     const token = localStorage.getItem('token');
 
     if (!token) {

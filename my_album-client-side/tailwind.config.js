@@ -3,6 +3,8 @@ export default {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{html,js}',
+    './node_modules/flowbite/**/*.js',
     './node_modules/flowbite-react/lib/esm/**/*.js',
     './node_modules/tw-elements/dist/js/**/*.js',
   ],

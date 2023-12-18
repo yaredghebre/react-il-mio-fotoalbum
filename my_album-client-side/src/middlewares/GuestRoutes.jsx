@@ -8,7 +8,7 @@ const GuestRoutes = ({ children }) => {
 
   useEffect(() => {
     if (isLogged) {
-      navigate('/dashboard');
+      // navigate('/dashboard');
     }
   }, [isLogged]);
   return <div>{children}</div>;

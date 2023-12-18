@@ -24,7 +24,7 @@ const Login = () => {
 
       handleAuth(response.data);
 
-      navigate('/dashboard');
+      // navigate('/dashboard');
     } catch (error) {
       setError('Invalid credentials!');
       console.error('Errore durante il login:', error);
