@@ -35,7 +35,7 @@ async function index(req, res, next) {
 
 async function show(req, res, next) {
   const pictureId = req.params.id;
-  const showData = await prisma.picture.findUnique({
+  const data = await prisma.picture.findUnique({
     where: {
       id: +pictureId,
     },
@@ -44,11 +44,11 @@ async function show(req, res, next) {
     },
   });
 
-  if (!showData) {
+  if (!data) {
     next(new NotFound("Post Not Found"));
   }
 
-  return res.json(showData);
+  return res.json(data);
 }
 
 async function store(req, res, next) {

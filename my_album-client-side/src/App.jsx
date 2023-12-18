@@ -21,6 +21,7 @@ import PrivateRoutes from './middlewares/PrivateRoutes';
 
 // Contexts
 import AuthProvider from './contexts/AuthProvider';
+import SinglePicture from './pages/SinglePicture';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
             >
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/pictures" element={<AdminPictures />}></Route>
+              <Route path="/pictures/:id" element={<SinglePicture />}></Route>
             </Route>
           </Routes>
         </AuthProvider>
