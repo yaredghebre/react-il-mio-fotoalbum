@@ -45,22 +45,38 @@ const AddNewPicture = () => {
   }, []);
 
   const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
+    const { name, value, type, checked, files } = e.target;
+    const file = type === 'file' ? files[0] : null;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: type === 'checkbox' ? checked : file || value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('title', formData.title);
+    formDataToSend.append('description', formData.description);
+    formDataToSend.append('userId', formData.userId);
+    formDataToSend.append('visible', formData.visible);
+
+    formData.categories.forEach((categoryId) => {
+      formDataToSend.append('categories[]', categoryId);
+    });
+
+    formDataToSend.append('image', formData.image);
+
     try {
       const response = await axios.post(
         'http://localhost:3000/admin/pictures',
-        formData,
+        formDataToSend,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'multipart/form-data',
           },
         },
       );
@@ -245,9 +261,7 @@ const AddNewPicture = () => {
                 id="image"
                 name="image"
                 accept="image/*"
-                value={formData.image}
                 onChange={handleInputChange}
-                // className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:shadow-sm-light dark:focus:border-blue-500 dark:focus:ring-blue-500"
               />
             </div>
 

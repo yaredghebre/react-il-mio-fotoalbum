@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import fetchApi from '../utilities/fetchApi';
 import AddNewPicture from '../components/AddNewPicture';
+import Card from '../components/Card';
 
 const AdminPictures = () => {
   const [pictures, setPictures] = useState([]);
@@ -62,6 +63,7 @@ const AdminPictures = () => {
               </Link>
             ))}
           </div>
+          <Card></Card>
         </div>
       </div>
     </div>
