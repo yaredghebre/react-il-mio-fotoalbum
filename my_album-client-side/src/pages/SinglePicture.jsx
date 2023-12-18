@@ -29,7 +29,7 @@ const SinglePicture = () => {
   const getPicture = async (id) => {
     try {
       const resp = await fetchApi(`/admin/pictures/${id}`);
-      setPicture(resp.data);
+      setPicture(resp);
       console.log(resp.data);
     } catch (error) {
       console.log('Error fetching picture:', error.message);
