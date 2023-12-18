@@ -30,40 +30,17 @@ const AdminPictures = () => {
             <h1 className="text-center text-4xl font-bold">ALL Pictures</h1>
             <AddNewPicture></AddNewPicture>
           </div>
-          <div className="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center gap-5">
             {pictures.map((picture) => (
-              <Link
-                to={`/pictures/${picture.id}`}
+              <Card
                 key={picture.id}
-                className="transtion m-4 max-w-sm transform cursor-pointer rounded-lg border border-gray-200 bg-white shadow duration-150 hover:scale-105 hover:border-gray-400 hover:shadow-lg hover:shadow-gray-500 dark:border-gray-700 dark:bg-gray-800"
-              >
-                <div className="relative block max-h-[150px] w-full max-w-[250px] overflow-hidden rounded-t-lg">
-                  {!picture.image && (
-                    <p className="absolute left-1/2 top-1/2 z-10 w-full -translate-x-1/2 -translate-y-1/2 transform py-2 text-center text-xl font-bold uppercase text-red-500">
-                      Image Unavailable
-                    </p>
-                  )}
-                  <img
-                    className="w-full rounded-t-lg object-cover"
-                    src={picture.image}
-                    alt={picture.title}
-                  />
-                </div>
-
-                <div className="p-5">
-                  <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      {picture.title}
-                    </h5>
-                  </a>
-                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {picture.description}
-                  </p>
-                </div>
-              </Link>
+                title={picture.title}
+                description={picture.description}
+                image={picture.image}
+                id={picture.id}
+              ></Card>
             ))}
           </div>
-          <Card></Card>
         </div>
       </div>
     </div>
@@ -71,3 +48,37 @@ const AdminPictures = () => {
 };
 
 export default AdminPictures;
+
+{
+  /* <div className="relative block max-h-[150px] w-full max-w-[250px] overflow-hidden rounded-t-lg">
+{!picture.image && (
+  <p className="absolute left-1/2 top-1/2 z-10 w-full -translate-x-1/2 -translate-y-1/2 transform py-2 text-center text-xl font-bold uppercase text-red-500">
+    Image Unavailable
+  </p>
+)}
+<img
+  className="w-full rounded-t-lg object-cover"
+  src={picture.image}
+  alt={picture.title}
+/>
+</div>
+
+<div className="p-5">
+<a href="#">
+  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+    {picture.title}
+  </h5>
+</a>
+<p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+  {picture.description}
+</p>
+</div> */
+}
+
+{
+  /* <Link
+to={`/pictures/${picture.id}`}
+key={picture.id}
+className="transtion m-4 max-w-sm transform cursor-pointer rounded-lg border border-gray-200 bg-white shadow duration-150 hover:scale-105 hover:border-gray-400 hover:shadow-lg hover:shadow-gray-500 dark:border-gray-700 dark:bg-gray-800"
+></Link> */
+}
