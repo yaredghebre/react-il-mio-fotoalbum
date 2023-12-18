@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import fetchApi from '../utilities/fetchApi';
+import NotFound from './NotFound';
 
 const SinglePicture = () => {
   const { id } = useParams();
   const [picture, setPicture] = useState(null);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  console.log(picture);
+  const [notFound, setNotFound] = useState(false);
 
   const getUsers = async () => {
     try {
@@ -52,17 +53,21 @@ const SinglePicture = () => {
     fetchData();
   }, [id]);
 
-  if (isLoading || !picture) {
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (notFound || !picture) {
+    return <NotFound />;
   }
 
   return (
     <div className="flex items-center justify-center bg-blue-200 lg:min-h-screen">
-      <div className="min-w-[500px] rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
+      <div className="max-w-[800px] rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
         <div className="relative block w-full overflow-hidden rounded-t-lg">
           <img
             className="w-full rounded-t-lg object-cover"
-            src={picture.image}
+            src={`http://localhost:3000/${picture.image}`}
             alt={picture.title}
           />
         </div>

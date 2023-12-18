@@ -10,7 +10,7 @@ import DefaultLayout from './pages/DefaultLayout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Pictures from './pages/Pictures';
+import NotFound from './pages/NotFound';
 
 // AdminPages
 import AdminPictures from './pages/AdminPictures';
@@ -53,6 +53,7 @@ function App() {
               <Route path="/pictures" element={<AdminPictures />}></Route>
               <Route path="/pictures/:id" element={<SinglePicture />}></Route>
             </Route>
+            <Route path="/*" element={<NotFound />}></Route>
           </Routes>
         </AuthProvider>
       </BrowserRouter>

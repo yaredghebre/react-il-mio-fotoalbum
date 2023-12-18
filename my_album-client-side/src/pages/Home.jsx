@@ -52,28 +52,12 @@ const Home = () => {
                   key={picture.id}
                   class="transtion m-4 max-w-sm transform cursor-pointer rounded-lg border border-gray-200 bg-white shadow duration-150 hover:scale-105 hover:border-gray-400 hover:shadow-lg hover:shadow-gray-500 dark:border-gray-700 dark:bg-gray-800"
                 >
-                  <div className="relative block max-h-[150px] w-full max-w-[250px] overflow-hidden rounded-t-lg">
-                    {!picture.image && (
-                      <p className="absolute left-1/2 top-1/2 z-10 w-full -translate-x-1/2 -translate-y-1/2 transform py-2 text-center text-xl font-bold uppercase text-red-500">
-                        Image Unavailable
-                      </p>
-                    )}
+                  <div className="relative block h-[250px] w-full overflow-hidden rounded-t-lg">
                     <img
-                      className="w-full rounded-t-lg object-cover"
-                      src={picture.image}
+                      className="h-full w-full rounded-t-lg object-cover"
+                      src={`http://localhost:3000/${picture.image}`}
                       alt={picture.title}
                     />
-                  </div>
-
-                  <div class="p-5">
-                    <a href="#">
-                      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        {picture.title}
-                      </h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                      {picture.description}
-                    </p>
                   </div>
                 </Link>
               ))}
